@@ -1,4 +1,4 @@
-import { logout, signInWithGoogle, logInWithGoogle } from "../../../firebase/firebase";
+import { logout, logInWithGoogle } from "../../../firebase/firebase";
 import { useAuth } from "../../../contexts/AuthContext";
 import Link from "next/link";
 import Logo from '@/assets/logo.svg'
@@ -40,6 +40,13 @@ const Navbar = () => {
 
       <div className="flex-1"></div>
       <ul className="menu menu-horizontal px-1 gap-5">
+        {!user &&
+          <li className={`${router.pathname === '/discover' ? 'underline-offset-1 custom-active' : ''}`}>
+            {/* A link to the user's discover page */}
+            <Link href={`/discover`} className="w-18">
+              <div className="text-[18px] text-[#195BA5]">Discover Professionals</div>
+            </Link>
+          </li>}
         {user && user.userType == "patient" &&
           <li className={`${router.pathname === '/discover' ? 'underline-offset-1 custom-active' : ''}`}>
             {/* A link to the user's discover page */}
@@ -60,8 +67,8 @@ const Navbar = () => {
             <div className="text-[18px] text-[#195BA5]">About Us</div>
           </Link>
         </li>
-        {!user ? <li className={`${router.pathname === '/psych_questionnaire' ? 'underline-offset-1 custom-active' : ''}`}>
-          <Link href="/psych_questionnaire" className="w-18">
+        {!user ? <li className={`${router.pathname === '/questionnaire' ? 'underline-offset-1 custom-active' : ''}`}>
+          <Link href="/questionnaire" className="w-18">
             <div className="text-[18px] text-[#195BA5]">Sign Up</div>
           </Link>
         </li> : <div></div>}
